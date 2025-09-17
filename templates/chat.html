@@ -1,0 +1,13 @@
+{% extends "_base.html" %}
+{% block content %}
+<section class="card">
+<h2>🤖 Web Chatbot</h2>
+<div id="chatbox" class="chatbox"></div>
+<form id="chatform" class="chatform">
+<input id="username" type="text" placeholder="Nama kamu (opsional)" />
+<input id="message" type="text" placeholder="Ketik pesan: 'jadwal', 'siaran', atau 'request Judul - Artis'..." required />
+<button class="btn" type="submit">Kirim</button>
+</form>
+</section>
+<script src="{{ url_for('static', filename='chat.js') }}"></script>
+{% endblock %}

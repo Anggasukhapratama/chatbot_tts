@@ -1,0 +1,244 @@
+/* ===============================
+   Sebayu FM – Ultra Clean Theme
+   - Dark glassmorphism + soft neon
+   - A11y focus states
+   - Smooth micro-animations
+   =============================== */
+
+/* ---------- CSS Variables ---------- */
+:root{
+  --bg:#0a0b10;
+  --surface:#10121a;
+  --surface-2:#121523;
+  --border:#1e2233;
+  --text:#e7eaf3;
+  --muted:#a3acc2;
+  --brand-1:#7c3aed;   /* purple */
+  --brand-2:#06b6d4;   /* cyan */
+  --ok:#10b981;
+  --warn:#f59e0b;
+  --err:#ef4444;
+  --shadow:0 10px 30px rgba(0,0,0,.35);
+  --glass:rgba(255,255,255,.04);
+  --radius:16px;
+  --radius-xl:22px;
+  --blur:14px;
+}
+
+/* Light mode (optional) */
+@media (prefers-color-scheme: light){
+  :root{
+    --bg:#f7f8fb;
+    --surface:#ffffffdb;
+    --surface-2:#ffffffc9;
+    --border:#e6e9ef;
+    --text:#12131a;
+    --muted:#56607a;
+    --shadow:0 8px 24px rgba(12,16,31,.08);
+    --glass:rgba(255,255,255,.6);
+  }
+}
+
+/* ---------- Base Reset ---------- */
+*{box-sizing:border-box}
+html,body{height:100%}
+html,body{
+  margin:0;
+  padding:0;
+  background: radial-gradient(1200px 700px at 10% -10%, rgba(124,58,237,.18), transparent 60%),
+              radial-gradient(1000px 600px at 110% 10%, rgba(6,182,212,.14), transparent 60%),
+              var(--bg);
+  color:var(--text);
+  font:400 15px/1.55 Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+
+/* Custom scrollbars (webkit-based) */
+*::-webkit-scrollbar{width:10px;height:10px}
+*::-webkit-scrollbar-thumb{
+  background: linear-gradient(180deg, var(--brand-1), var(--brand-2));
+  border-radius:999px; border:2px solid transparent; background-clip: padding-box;
+}
+*::-webkit-scrollbar-track{background:transparent}
+
+/* ---------- Layout ---------- */
+.container{max-width:1100px;margin:0 auto;padding:18px}
+.topbar{
+  position:sticky; top:0; z-index:40;
+  backdrop-filter:saturate(140%) blur(10px);
+  background:linear-gradient(180deg, rgba(15,17,23,.7), rgba(15,17,23,.35));
+  border-bottom:1px solid var(--border);
+}
+.brand{
+  font-weight:800; letter-spacing:.3px; text-decoration:none; color:var(--text);
+  padding:10px 12px; border-radius:12px; transition:transform .2s ease;
+}
+.brand:hover{transform:translateY(-1px)}
+.nav a{
+  color:var(--muted); text-decoration:none; margin:0 10px; padding:10px 6px; border-radius:10px;
+  transition:color .2s ease, background .2s ease;
+}
+.nav a:hover{color:var(--text); background:rgba(255,255,255,.06)}
+
+.footer{
+  border-top:1px solid var(--border);
+  margin-top:32px; padding:20px 0; color:var(--muted);
+}
+
+/* Responsive grid */
+.grid{display:grid; gap:18px}
+@media (min-width:980px){ .grid{grid-template-columns:1fr 1fr}}
+
+/* ---------- Cards ---------- */
+.card{
+  background:linear-gradient(180deg, var(--surface), var(--surface-2));
+  border:1px solid var(--border);
+  border-radius:var(--radius-xl);
+  padding:18px;
+  box-shadow: var(--shadow);
+  position:relative;
+  overflow:hidden;
+}
+.card::before{
+  content:""; position:absolute; inset:-1px; border-radius:inherit;
+  background: radial-gradient(600px 140px at 20% -10%, rgba(124,58,237,.16), transparent 60%),
+              radial-gradient(400px 120px at 120% -30%, rgba(6,182,212,.18), transparent 60%);
+  pointer-events:none; mix-blend:screen; opacity:.9;
+}
+.card h2{margin:0 0 8px 0; font-size:20px; letter-spacing:.3px}
+.card h3{margin:14px 0 8px; font-size:16px}
+
+/* ---------- Typography helpers ---------- */
+.muted{color:var(--muted)}
+.hint{margin-top:8px;color:var(--muted)}
+
+/* ---------- Buttons ---------- */
+.btn{
+  appearance:none; border:0; cursor:pointer; text-decoration:none; color:white;
+  background:linear-gradient(90deg, var(--brand-1), var(--brand-2));
+  padding:10px 14px; border-radius:14px; box-shadow: 0 6px 20px rgba(124,58,237,.28);
+  transition: transform .1s ease, box-shadow .2s ease, filter .2s ease;
+  display:inline-flex; align-items:center; gap:8px; font-weight:600;
+}
+.btn:hover{filter:brightness(1.04)}
+.btn:active{transform:translateY(1px)}
+.btn:disabled{opacity:.6; cursor:not-allowed}
+
+/* ---------- Forms ---------- */
+.form-grid{display:grid; gap:12px}
+.form-group{display:flex; flex-direction:column; gap:6px}
+input[type="text"], input[type="file"], select{
+  background:var(--glass);
+  backdrop-filter: blur(var(--blur));
+  border:1px solid var(--border);
+  color:var(--text);
+  border-radius:12px; padding:11px 12px;
+  transition: border-color .2s ease, box-shadow .2s ease;
+}
+select{padding-right:34px}
+input::file-selector-button{
+  border:0; padding:8px 10px; margin-right:10px; border-radius:10px; color:#fff;
+  background:linear-gradient(90deg, var(--brand-1), var(--brand-2));
+}
+.radio{display:flex; align-items:center; gap:8px; margin-right:12px}
+.inline{display:flex; gap:12px; flex-wrap:wrap; align-items:center}
+.check{display:flex; gap:8px; align-items:center}
+.form-actions{margin-top:8px}
+
+input:focus, select:focus{
+  outline:none;
+  border-color: color-mix(in srgb, var(--brand-2) 60%, white 40%);
+  box-shadow: 0 0 0 3px rgba(6,182,212,.18);
+}
+
+/* ---------- Tables ---------- */
+.table{width:100%; border-collapse:collapse; overflow:hidden; border-radius:14px}
+.table thead th{
+  font-weight:700; text-align:left; color:var(--muted); font-size:.92rem;
+  background:rgba(255,255,255,.03);
+}
+.table th, .table td{border-bottom:1px solid var(--border); padding:12px}
+.table tr:hover td{background:rgba(255,255,255,.025)}
+.pill{
+  background:rgba(255,255,255,.07); color:#e5e7eb; padding:3px 10px; border-radius:999px; font-size:.85rem
+}
+.tag{
+  background:rgba(6,182,212,.16); color:#a7f3d0; padding:2px 8px; border-radius:10px; font-size:.78rem; margin-left:6px
+}
+
+/* ---------- Pre / Code blocks ---------- */
+.pre{
+  white-space:pre-wrap;
+  background:var(--glass);
+  border:1px solid var(--border); border-radius:12px; padding:12px;
+  backdrop-filter: blur(var(--blur));
+}
+
+/* ---------- Flash / Alerts ---------- */
+.flash{
+  background:linear-gradient(180deg, rgba(31,41,55,.9), rgba(31,41,55,.75));
+  color:#fff; padding:10px 12px; border-radius:12px; border:1px solid var(--border);
+}
+
+/* ---------- Chat ---------- */
+#chatbox{
+  background:linear-gradient(180deg, rgba(14,17,23,.9), rgba(14,17,23,.75));
+  border:1px solid var(--border);
+  border-radius:18px; height:380px; overflow:auto; padding:14px; margin-bottom:10px;
+  box-shadow: var(--shadow);
+}
+#chatform{display:flex; gap:8px}
+#chatform input[type="text"]{
+  flex:1;
+  background:var(--glass);
+  border:1px solid var(--border); color:var(--text);
+  border-radius:12px; padding:11px 12px;
+}
+
+.chatmsg{
+  max-width:78%; padding:10px 12px; border-radius:14px; margin:8px 0; white-space:pre-wrap;
+  animation: floatIn .24s ease;
+}
+.chatmsg.you{
+  background:linear-gradient(180deg, #243b55, #1f2e44);
+  margin-left:auto;
+  border:1px solid rgba(255,255,255,.06);
+}
+.chatmsg.bot{
+  background:linear-gradient(180deg, #171c28, #141825);
+  border:1px solid rgba(124,58,237,.18);
+}
+#typing-ind{
+  opacity:.9;
+  background:linear-gradient(90deg, rgba(124,58,237,.18), rgba(6,182,212,.18));
+}
+
+/* ---------- Progress Bar ---------- */
+.progress{
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--border);
+  border-radius:12px; overflow:hidden; height:12px; box-shadow: inset 0 1px 2px rgba(0,0,0,.25);
+}
+.progress .bar{
+  height:100%; width:0%;
+  background:linear-gradient(90deg, var(--brand-1), var(--brand-2));
+  transition: width .45s ease;
+}
+
+/* ---------- Links ---------- */
+a{color:color-mix(in srgb, var(--brand-2) 85%, white 15%); text-underline-offset:3px}
+a:hover{color:#8be9ff}
+
+/* ---------- Animations ---------- */
+@keyframes floatIn{
+  from{transform:translateY(4px); opacity:0}
+  to{transform:translateY(0); opacity:1}
+}
+
+/* ---------- Motion & Accessibility ---------- */
+@media (prefers-reduced-motion: reduce){
+  *{animation:none!important; transition:none!important}
+}
+
+/* ---------- Utility ---------- */
+hr{border:0; height:1px; background:var(--border); margin:16px 0}
+.hidden{display:none!important}

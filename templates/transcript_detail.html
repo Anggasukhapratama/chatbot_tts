@@ -1,0 +1,35 @@
+{% extends "_base.html" %}
+{% block content %}
+<section class="card">
+  <h2>📄 Transkrip – {{ tr['program'] }}</h2>
+  <div class="muted">{{ tr['created_at'] }} • File: {{ tr['filename'] }}</div>
+
+  {% if tr['summary'] %}
+    <h3>🧾 Ringkasan</h3>
+    <pre class="pre">{{ tr['summary'] }}</pre>
+  {% endif %}
+
+  {# === Tambahan: Teks Bersih === #}
+  {% if tr['cleaned_transcript'] %}
+    <h3>✨ Teks Bersih</h3>
+    <pre class="pre">{{ tr['cleaned_transcript'] }}</pre>
+  {% else %}
+  <form method="post" action="{{ url_for('transcription.transcript_delete', tid=tr['id']) }}" 
+      onsubmit="return confirm('Yakin mau hapus transkrip ini?')">
+  <button class="btn btn-danger" type="submit">🗑 Hapus Transkrip</button>
+</form>
+    <form method="post" action="{{ url_for('transcription.transcript_clean', tid=tr['id']) }}">
+      <button class="btn" type="submit">✨ Bersihkan Transkrip</button>
+    </form>
+  {% endif %}
+
+  <h3>📝 Teks Lengkap</h3>
+  <pre class="pre">{{ tr['transcript'] }}</pre>
+
+  <p>
+    <a class="btn" href="{{ url_for('minutes_bp.transcript_minutes', tid=tr['id']) }}">🧾 Jadikan Notulen</a>
+    <a class="btn" href="{{ url_for('editor_bp.transcript_edit', tid=tr['id']) }}">✏️ Edit & Cetak</a>
+    <a class="btn" href="{{ url_for('main.transcripts') }}">↩ Kembali</a>
+  </p>
+</section>
+{% endblock %}
