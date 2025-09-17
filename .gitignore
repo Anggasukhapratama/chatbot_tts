@@ -1,0 +1,16 @@
+@"
+# python
+.venv/
+__pycache__/
+*.pyc
+
+# data lokal
+instance/
+sebayu_app/instance/
+uploads/
+*.db
+
+# audio/media berat
+*.wav
+*.mp3
+"@ | Out-File -Encoding UTF8 .gitignore
